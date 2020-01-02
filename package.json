@@ -23,8 +23,11 @@
     "chai": "4.2.0",
     "eslint": "6.8.0",
     "eslint-plugin-vue": "6.1.2",
-    "sass": "1.24.0",
+    "husky": "^3.1.0",
+    "imagemin-lint-staged": "^0.4.0",
+    "lint-staged": "^9.5.0",
     "mocha": "6.2.2",
+    "sass": "1.24.0",
     "sass-loader": "8.0.0",
     "uuid": "3.3.3",
     "vue-cli-plugin-axios": "0.0.4",
@@ -55,5 +58,26 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm test",
+      "post-commit": "git update-index --again"
+    }
+  },
+  "lint-staged": {
+    "*.{html,css,json,md}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{ts,js,tsx,jsx}": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{png,jpeg,jpg,gif,svg}": [
+      "imagemin-lint-staged",
+      "git add"
+    ]
+  }
 }
