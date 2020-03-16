@@ -1,5 +1,7 @@
 # vue-todo
 
+![Node CI](https://github.com/DarthRatz/vue-todo/workflows/Node%20CI/badge.svg)
+
 ## Project setup
 
 ```
