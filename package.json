@@ -5,11 +5,14 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "core-js": "3.6.5",
-    "vue": "2.6.11"
+    "vue": "2.6.11",
+    "snyk": "^1.338.0"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.1",
@@ -71,5 +74,6 @@
       "imagemin-lint-staged",
       "git add"
     ]
-  }
+  },
+  "snyk": true
 }
