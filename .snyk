@@ -10,3 +10,9 @@ patch:
         patched: '2020-06-10T14:44:34.991Z'
     - node-sass > gaze > globule > lodash:
         patched: '2020-06-10T14:44:34.991Z'
+    - vue-cli-plugin-electron-builder > webpack-merge > lodash:
+        patched: '2020-06-10T15:06:37.624Z'
+    - vue-cli-plugin-electron-builder > portfinder > async > lodash:
+        patched: '2020-06-10T15:06:37.624Z'
+    - electron > @electron/get > global-tunnel-ng > lodash:
+        patched: '2020-06-10T15:06:37.624Z'
