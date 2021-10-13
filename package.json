@@ -15,7 +15,7 @@
   },
   "main": "background.js",
   "dependencies": {
-    "core-js": "3.6.5",
+    "core-js": "3.18.3",
     "snyk": "^1.421.1",
     "vue": "2.6.11"
   },
