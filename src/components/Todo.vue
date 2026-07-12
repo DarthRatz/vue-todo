@@ -28,6 +28,7 @@
 
 <script>
 export default {
+  name: "TodoItem",
   data() {
     return {
       isEditing: false,

@@ -20,18 +20,23 @@ npm run serve
 npm run build
 ```
 
-### Run your tests
-
-```
-npm run test
-```
-
-### Lints and fixes files
+### Lints files
 
 ```
 npm run lint
 ```
 
-### Customize configuration
+## Project structure
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- `src/main.js` — app entrypoint
+- `src/App.vue` — root component
+- `src/components/` — reusable Vue components
+- `vite.config.js` — Vite configuration
+
+## Notes
+
+This project now uses Vite and Vue 3 instead of Vue CLI.
+
+### Configuration reference
+
+See [Vite Documentation](https://vitejs.dev/config/).

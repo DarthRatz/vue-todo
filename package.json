@@ -3,54 +3,42 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "electron:build": "vue-cli-service electron:build",
-    "electron:serve": "vue-cli-service electron:serve",
-    "postinstall": "electron-builder install-app-deps",
-    "postuninstall": "electron-builder install-app-deps",
-    "prepare": "npm run snyk-protect",
-    "snyk-protect": "snyk protect"
+    "serve": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint --ext .js,.vue src"
   },
-  "main": "background.js",
   "dependencies": {
-    "core-js": "3.6.5",
-    "snyk": "^1.421.1",
-    "vue": "2.6.11"
+    "vue": "^3.4.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.8",
-    "@vue/cli-plugin-eslint": "~4.5.7",
-    "@vue/cli-service": "~4.4.6",
-    "@vue/eslint-config-prettier": "^6.0.0",
-    "babel-eslint": "^10.1.0",
-    "electron": "^9.0.0",
-    "eslint": "^7.2.0",
-    "eslint-plugin-prettier": "^3.1.3",
-    "eslint-plugin-vue": "^6.2.2",
-    "husky": "4.2.5",
-    "imagemin-lint-staged": "0.4.0",
-    "lint-staged": "10.5.4",
-    "node-sass": "^4.14.1",
-    "prettier": "^2.0.5",
-    "sass-loader": "^10.0.4",
-    "vue-cli-plugin-electron-builder": "~2.0.0-rc.1",
-    "vue-template-compiler": "^2.6.11"
+    "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/compiler-sfc": "^3.4.0",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^8.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-vue": "^9.0.0",
+    "prettier": "^3.0.0",
+    "sass": "^1.70.0",
+    "vite": "^5.0.0"
   },
   "eslintConfig": {
     "root": true,
     "env": {
+      "browser": true,
+      "es2021": true,
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
-      "eslint:recommended"
+      "plugin:vue/vue3-essential",
+      "eslint:recommended",
+      "prettier"
     ],
-    "rules": {},
     "parserOptions": {
-      "parser": "babel-eslint"
-    }
+      "ecmaVersion": 2020,
+      "sourceType": "module"
+    },
+    "rules": {}
   },
   "postcss": {
     "plugins": {
@@ -60,27 +48,5 @@
   "browserslist": [
     "> 1%",
     "last 2 versions"
-  ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "pre-push": "npm test",
-      "post-commit": "git update-index --again"
-    }
-  },
-  "lint-staged": {
-    "*.{html,css,json,md}": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.{ts,js,tsx,jsx}": [
-      "eslint --fix",
-      "git add"
-    ],
-    "*.{png,jpeg,jpg,gif,svg}": [
-      "imagemin-lint-staged",
-      "git add"
-    ]
-  },
-  "snyk": true
+  ]
 }
