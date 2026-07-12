@@ -43,6 +43,14 @@ export default {
       nextId: 4
     };
   },
+  computed: {
+    activeTodos() {
+      return this.todos.filter(todo => !todo.completed);
+    },
+    completedTodos() {
+      return this.todos.filter(todo => todo.completed);
+    }
+  },
   methods: {
     addTodo(newTodo) {
       this.todos.push({ id: this.nextId++, description: newTodo, completed: false });
