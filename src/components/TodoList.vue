@@ -12,8 +12,8 @@
       <div class="col-12 col-sm-10 col-lg-6">
         <ul class="list-group">
           <todo
-            v-for="(todo, index) in todos"
-            :key="index"
+            v-for="todo in todos"
+            :key="todo.id"
             :description="todo.description"
             :completed="todo.completed"
             @on-toggle="toggleTodo(todo)"
@@ -36,15 +36,16 @@ export default {
   data() {
     return {
       todos: [
-        { description: "Do the dishes", completed: false },
-        { description: "Take out the trash", completed: false },
-        { description: "Finish doing laundry", completed: false }
-      ]
+        { id: 1, description: "Do the dishes", completed: false },
+        { id: 2, description: "Take out the trash", completed: false },
+        { id: 3, description: "Finish doing laundry", completed: false }
+      ],
+      nextId: 4
     };
   },
   methods: {
     addTodo(newTodo) {
-      this.todos.push({ description: newTodo, completed: false });
+      this.todos.push({ id: this.nextId++, description: newTodo, completed: false });
     },
     toggleTodo(todo) {
       todo.completed = !todo.completed;
