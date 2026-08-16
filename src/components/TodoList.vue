@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="row mb-3">
-      <create-todo @on-new-todo="addTodo($event)" />
+      <create-todo @on-new-todo="addTodo" />
     </div>
     <div class="row">
       <div class="col-12 col-sm-10 col-lg-6">
@@ -14,11 +14,12 @@
           <todo
             v-for="todo in todos"
             :key="todo.id"
+            :id="todo.id"
             :description="todo.description"
             :completed="todo.completed"
-            @on-toggle="toggleTodo(todo)"
-            @on-delete="deleteTodo(todo)"
-            @on-edit="editTodo(todo, $event)"
+            @on-toggle="toggleTodo"
+            @on-delete="deleteTodo"
+            @on-edit="editTodo"
           />
         </ul>
       </div>
@@ -53,16 +54,31 @@ export default {
   },
   methods: {
     addTodo(newTodo) {
-      this.todos.push({ id: this.nextId++, description: newTodo, completed: false });
+      if (typeof newTodo === 'object' && newTodo !== null) {
+        // called from child emit with raw string or object; handle both
+        newTodo = String(newTodo);
+      }
+      if (newTodo && newTodo.length > 0) {
+        this.todos.push({ id: this.nextId++, description: newTodo, completed: false });
+      }
     },
-    toggleTodo(todo) {
-      todo.completed = !todo.completed;
+    toggleTodo(id) {
+      const t = this.todos.find(todo => todo.id === id);
+      if (t) t.completed = !t.completed;
     },
-    deleteTodo(deletedTodo) {
-      this.todos = this.todos.filter(todo => todo !== deletedTodo);
+    deleteTodo(id) {
+      this.todos = this.todos.filter(todo => todo.id !== id);
     },
-    editTodo(todo, newTodoDescription) {
-      todo.description = newTodoDescription;
+    editTodo(payload) {
+      // payload may be { id, description } or (id, description) depending on emitter
+      let id, description;
+      if (payload && typeof payload === 'object' && 'id' in payload) {
+        id = payload.id; description = payload.description;
+      } else if (Array.isArray(arguments) && arguments.length >= 2) {
+        id = arguments[0]; description = arguments[1];
+      }
+      const t = this.todos.find(todo => todo.id === id);
+      if (t && typeof description === 'string') t.description = description;
     }
   },
   components: { Todo, CreateTodo }
