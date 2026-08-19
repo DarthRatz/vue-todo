@@ -28,8 +28,9 @@
 </template>
 
 <script>
-import Todo from "./Todo.vue";
-import CreateTodo from "./CreateTodo.vue";
+import { defineAsyncComponent } from 'vue'
+const Todo = defineAsyncComponent(() => import('./Todo.vue'))
+const CreateTodo = defineAsyncComponent(() => import('./CreateTodo.vue'))
 export default {
   props: {
     listName: String
