@@ -12,7 +12,7 @@
       <div class="col-12 col-sm-10 col-lg-6">
         <ul class="list-group">
           <todo
-            v-for="todo in todos"
+            v-for="todo in visibleTodos"
             :key="todo.id"
             :id="todo.id"
             :description="todo.description"
@@ -45,19 +45,12 @@ export default {
     };
   },
   computed: {
-    activeTodos() {
-      return this.todos.filter(todo => !todo.completed);
-    },
-    completedTodos() {
-      return this.todos.filter(todo => todo.completed);
+    visibleTodos() {
+      return this.todos;
     }
   },
   methods: {
     addTodo(newTodo) {
-      if (typeof newTodo === 'object' && newTodo !== null) {
-        // called from child emit with raw string or object; handle both
-        newTodo = String(newTodo);
-      }
       if (newTodo && newTodo.length > 0) {
         this.todos.push({ id: this.nextId++, description: newTodo, completed: false });
       }
@@ -70,13 +63,7 @@ export default {
       this.todos = this.todos.filter(todo => todo.id !== id);
     },
     editTodo(payload) {
-      // payload may be { id, description } or (id, description) depending on emitter
-      let id, description;
-      if (payload && typeof payload === 'object' && 'id' in payload) {
-        id = payload.id; description = payload.description;
-      } else if (Array.isArray(arguments) && arguments.length >= 2) {
-        id = arguments[0]; description = arguments[1];
-      }
+      const { id, description } = payload;
       const t = this.todos.find(todo => todo.id === id);
       if (t && typeof description === 'string') t.description = description;
     }
